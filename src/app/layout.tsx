@@ -6,7 +6,6 @@ import { Providers } from "../libs/Providers/Providers";
 
 import { siteConfig } from "@/src/config/site";
 import { fontSans } from "@/src/config/fonts";
-import { Navbar } from "@/src/components/navbar";
 import ReduxProvider from "../libs/ReduxProvider/ReduxProvider";
 
 export const metadata: Metadata = {
@@ -43,12 +42,7 @@ export default function RootLayout({
       >
         <ReduxProvider>
           <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
-            <div className="relative flex flex-col h-screen">
-              <Navbar />
-              <main className="container mx-auto max-w-7xl pt-16 px-6 flex-grow">
-                {children}
-              </main>
-            </div>
+            {children}
           </Providers>
         </ReduxProvider>
       </body>

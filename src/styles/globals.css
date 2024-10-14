@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.my-container {
+  @apply px-4 md:px-0 mx-auto container;
+}
+
+.my-border {
+  @apply border-2 border-[#D62828];
+}
