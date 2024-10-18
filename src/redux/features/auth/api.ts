@@ -14,6 +14,9 @@ const authApi = baseApi.injectEndpoints({
       query: (userInfo) => ({
         url: "/auth/register",
         method: "POST",
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
         body: userInfo,
       }),
     }),
