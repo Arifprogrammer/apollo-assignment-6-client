@@ -16,10 +16,10 @@ import {
 const baseQuery = fetchBaseQuery({
   baseUrl: "http://localhost:5000/api/v1",
   credentials: "include",
-  prepareHeaders: (headers /* { getState } */) => {
+  prepareHeaders: async (headers /* { getState } */) => {
     // const token = (getState() as RootState).auth.token;
     // const token = cookies().get("token");
-    const token = getToken();
+    const token = await getToken();
 
     if (token) {
       headers.set("authorization", `Bearer ${token}`);

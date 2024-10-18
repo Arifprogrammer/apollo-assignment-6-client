@@ -2,9 +2,9 @@
 import { cookies } from "next/headers";
 
 export const getToken = () => {
-  return cookies().get("token");
+  return cookies().get("token")?.value;
 };
 
-export const setToken = (token: string) => {
-  return cookies().set("token", token);
+export const setToken = async (token: string) => {
+  cookies().set("token", token);
 };

@@ -11,6 +11,7 @@ import Swal from "sweetalert2";
 import { useState } from "react";
 import { useLoginMutation } from "@/src/redux/features/auth/api";
 import { useRouter } from "next/navigation";
+import { setToken } from "@/src/utils/token/token";
 
 export default function SignInPage() {
   //* nextjs hooks
@@ -28,7 +29,9 @@ export default function SignInPage() {
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     try {
       const res = await login(data).unwrap();
-      console.log(res);
+
+      // saving token in cookies
+      await setToken(res.token);
 
       if (res.success) {
         setDefaultValues({
@@ -58,7 +61,6 @@ export default function SignInPage() {
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
-      console.log(err);
       const Toast = Swal.mixin({
         toast: true,
         position: "top-end",
