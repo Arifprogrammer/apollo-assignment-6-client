@@ -21,3 +21,18 @@ export const loginSchema = z.object({
     .string({ required_error: "Password is required" })
     .min(4, { message: "Password must be at least 4 characters long" }),
 });
+
+export const forgotPasswordSchema = z.object({
+  email: z
+    .string({ required_error: "Email is required" })
+    .email({ message: "Email format is incorrect" }),
+});
+
+export const resetPasswordSchema = z.object({
+  email: z
+    .string({ required_error: "Email is required" })
+    .email({ message: "Email format is incorrect" }),
+  newPassword: z
+    .string({ required_error: "Password is required" })
+    .min(4, { message: "Password must be at least 4 characters long" }),
+});

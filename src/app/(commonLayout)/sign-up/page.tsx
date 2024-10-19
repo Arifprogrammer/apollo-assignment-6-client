@@ -7,10 +7,10 @@ import { FieldValues, SubmitHandler } from "react-hook-form";
 import { registrationSchema } from "@/src/schemas/auth.schema";
 import CustomButton from "@/src/components/core/customButton/CustomButton";
 import Link from "next/link";
-import Swal from "sweetalert2";
 import { ChangeEvent, useState } from "react";
 import { useRegisterMutation } from "@/src/redux/features/auth/api";
 import { useRouter } from "next/navigation";
+import { alert } from "@/src/utils/alert/alert";
 
 export default function SignUpPage() {
   //* nextjs hooks
@@ -44,17 +44,7 @@ export default function SignUpPage() {
         });
         setImageFile(null);
 
-        const Toast = Swal.mixin({
-          toast: true,
-          position: "top-end",
-          showConfirmButton: false,
-          timer: 2000,
-          timerProgressBar: true,
-          didOpen: (toast) => {
-            toast.onmouseenter = Swal.stopTimer;
-            toast.onmouseleave = Swal.resumeTimer;
-          },
-        });
+        const Toast = alert();
 
         Toast.fire({
           icon: "success",
@@ -66,17 +56,7 @@ export default function SignUpPage() {
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
-      const Toast = Swal.mixin({
-        toast: true,
-        position: "top-end",
-        showConfirmButton: false,
-        timer: 2000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-          toast.onmouseenter = Swal.stopTimer;
-          toast.onmouseleave = Swal.resumeTimer;
-        },
-      });
+      const Toast = alert();
 
       Toast.fire({
         icon: "error",

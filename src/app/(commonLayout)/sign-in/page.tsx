@@ -7,11 +7,11 @@ import { FieldValues, SubmitHandler } from "react-hook-form";
 import { loginSchema } from "@/src/schemas/auth.schema";
 import CustomButton from "@/src/components/core/customButton/CustomButton";
 import Link from "next/link";
-import Swal from "sweetalert2";
 import { useState } from "react";
 import { useLoginMutation } from "@/src/redux/features/auth/api";
 import { useRouter } from "next/navigation";
 import { setToken } from "@/src/utils/token/token";
+import { alert } from "@/src/utils/alert/alert";
 
 export default function SignInPage() {
   //* nextjs hooks
@@ -39,17 +39,7 @@ export default function SignInPage() {
           password: "",
         });
 
-        const Toast = Swal.mixin({
-          toast: true,
-          position: "top-end",
-          showConfirmButton: false,
-          timer: 2000,
-          timerProgressBar: true,
-          didOpen: (toast) => {
-            toast.onmouseenter = Swal.stopTimer;
-            toast.onmouseleave = Swal.resumeTimer;
-          },
-        });
+        const Toast = alert();
 
         Toast.fire({
           icon: "success",
@@ -61,17 +51,7 @@ export default function SignInPage() {
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
-      const Toast = Swal.mixin({
-        toast: true,
-        position: "top-end",
-        showConfirmButton: false,
-        timer: 2000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-          toast.onmouseenter = Swal.stopTimer;
-          toast.onmouseleave = Swal.resumeTimer;
-        },
-      });
+      const Toast = alert();
 
       Toast.fire({
         icon: "error",
@@ -111,14 +91,21 @@ export default function SignInPage() {
               Sign In
             </CustomButton>
           </CustomForm>
-          <p className="text-sm mt-2">
-            Do not have an account?{" "}
-            <Link href="/sign-up">
-              <span className="cursor-pointer text-[#54baf1] mt-px">
-                Sign up
+          <div className="flex items-center justify-between">
+            <p className="text-sm mt-2">
+              Do not have an account?{" "}
+              <Link href="/sign-up">
+                <span className="cursor-pointer text-[#54baf1] mt-px">
+                  Sign up
+                </span>
+              </Link>
+            </p>
+            <Link href="/forget-password">
+              <span className="cursor-pointer text-[#54baf1] mt-px text-sm">
+                forgot password?
               </span>
             </Link>
-          </p>
+          </div>
         </div>
       </section>
     </>
