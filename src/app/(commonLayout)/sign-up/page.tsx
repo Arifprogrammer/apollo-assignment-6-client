@@ -32,7 +32,19 @@ export default function SignUpPage() {
     const formData = new FormData();
 
     formData.append("data", JSON.stringify(data));
-    formData.append("image", imageFile as File);
+    if (imageFile) {
+      formData.append("image", imageFile as File);
+    } else {
+      const Toast = alert();
+
+      Toast.fire({
+        icon: "error",
+        title: "Please upload a profile image",
+      });
+
+      return;
+    }
+
     try {
       const res = await register(formData).unwrap();
 

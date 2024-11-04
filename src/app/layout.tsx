@@ -7,6 +7,7 @@ import { Providers } from "../libs/Providers/Providers";
 import { siteConfig } from "@/src/config/site";
 import { fontSans } from "@/src/config/fonts";
 import ReduxProvider from "../libs/ReduxProvider/ReduxProvider";
+import UserProvider from "./context/user.provider";
 
 export const metadata: Metadata = {
   title: {
@@ -41,9 +42,13 @@ export default function RootLayout({
         )}
       >
         <ReduxProvider>
-          <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
-            {children}
-          </Providers>
+          <UserProvider>
+            <Providers
+              themeProps={{ attribute: "class", defaultTheme: "dark" }}
+            >
+              {children}
+            </Providers>
+          </UserProvider>
         </ReduxProvider>
       </body>
     </html>

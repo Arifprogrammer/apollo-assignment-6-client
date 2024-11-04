@@ -12,6 +12,9 @@ import { useLoginMutation } from "@/src/redux/features/auth/api";
 import { useRouter } from "next/navigation";
 import { setToken } from "@/src/utils/token/token";
 import { alert } from "@/src/utils/alert/alert";
+import { useUser } from "../../context/user.provider";
+import { getCurrentUser } from "@/src/utils/auth/auth";
+import { IUser } from "@/src/types";
 
 export default function SignInPage() {
   //* nextjs hooks
@@ -22,6 +25,7 @@ export default function SignInPage() {
     email: "",
     password: "",
   });
+  const { setUser } = useUser();
 
   //* redux hooks
   const [login, { isLoading }] = useLoginMutation();
@@ -31,7 +35,11 @@ export default function SignInPage() {
       const res = await login(data).unwrap();
 
       // saving token in cookies
-      await setToken(res.token);
+      setToken(res.token);
+
+      const user = await getCurrentUser();
+
+      setUser(user as IUser);
 
       if (res.success) {
         setDefaultValues({

@@ -27,11 +27,7 @@ const ResetPasswordPage = () => {
   useEffect(() => {
     if (token) {
       // saving token in cookies
-      const saveTokenAsync = async () => {
-        await setToken(token);
-      };
-
-      saveTokenAsync();
+      setToken(token);
     }
   }, [token]);
 
@@ -43,7 +39,7 @@ const ResetPasswordPage = () => {
       const res = await resetPassword(data).unwrap();
 
       // saving token in cookies
-      await setToken(res.token);
+      setToken(res.token);
 
       if (res.success) {
         setDefaultValues({
